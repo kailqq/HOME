@@ -1,3 +1,250 @@
-<h1> HEllO </h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Modern+Antiqua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Arial", "微软雅黑", sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            transition: background-color 0.3s, color 0.3s, background-image 0.3s;
+        }
+        body.dark-mode {
+            background-color: rgba(0, 0, 0, 0.895);
+            color: #cacadf;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            color: #0073e6;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .theme-toggle.dark-mode {
+            color: #f4f4f9;
+        }
+        .card {
+            position: relative;
+            width: 800px; /* Reduced width */
+            height: 400px; /* Reduced height */
+            perspective: 1000px;
+        }
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            background-color: #fff;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        body.dark-mode .card-front, body.dark-mode .card-back {
+            background-color: #000;
+            color: #f4f4f9;
+            box-shadow: 0 7px 7px rgba(236, 137, 7, 0.4); /* White shadow in dark mode */
+        }
+        body.dark-mode .title,body.dark-mode .social-links a{
+            color: #ad8b73; 
+        }
+        body.dark-mode .description{
+            color: #8b4513; 
+        }
+        body.dark-mode .social-links a:hover{
+            color: #ff6347; 
+        }
+        body.dark-mode .cursor-dot{
+            background-color: #f3e5b6;
+        }
+        .title {
+            font-size: 1em; /* 调整大小 */
+            color: #333;
+            font-family: "Modern Antiqua", "宋体", serif;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+        }
+        .description {
+            color: #666;
+            font-family: "Great Vibes", "楷体", serif;
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            width: 80%;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+        .social-links a {
+            text-decoration: none;
+            color: #0073e6;
+            font-family: "JetBrains Mono", "黑体", sans-serif;
+            font-size: 0.8em;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .social-links a:hover {
+            transform: scale(1.2);
+            color: red;
+        }
+        .cursor-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #b2d3f4;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: background-color 0.2s;
+            opacity: 0.5; /* Added opacity */
+        }
+        .cursor-dot.broken {
+            animation: break 0.5s forwards;
+        }
+        @keyframes break {
+            0% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const card = document.querySelector('.card-inner');
+            const cursorDot = document.createElement('div');
+            cursorDot.classList.add('cursor-dot');
+            document.body.appendChild(cursorDot);
 
-<h2>正在写正在写</h2>
+            let mouseX = 0, mouseY = 0;
+            let dotX = 0, dotY = 0;
+
+            card.addEventListener('mousemove', function(event) {
+                mouseX = event.pageX;
+                mouseY = event.pageY;
+            });
+
+            card.addEventListener('mouseenter', function() {
+                cursorDot.style.display = 'block';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                cursorDot.style.display = 'none';
+            });
+
+            function animateDot() {
+                dotX += (mouseX - dotX) * 0.1;
+                dotY += (mouseY - dotY) * 0.1;
+                cursorDot.style.left = dotX + 'px';
+                cursorDot.style.top = dotY + 'px';
+                requestAnimationFrame(animateDot);
+            }
+
+            animateDot();
+
+            let isDragging = false;
+
+            card.addEventListener('mousedown', function() {
+                isDragging = true;
+                cursorDot.classList.add('broken');
+                setTimeout(() => {
+                    cursorDot.classList.remove('broken');
+                }, 500);
+            });
+
+            document.addEventListener('mouseup', function() {
+                if (isDragging) {
+                    card.style.transform = card.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+                    isDragging = false;
+                }
+            });
+
+            document.addEventListener('mousemove', function(event) {
+                if (isDragging) {
+                    event.preventDefault(); // Prevent text selection
+                }
+            });
+
+            const themeToggle = document.createElement('button');
+            themeToggle.classList.add('theme-toggle');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            document.body.appendChild(themeToggle);
+
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                themeToggle.classList.toggle('dark-mode');
+                themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="card-inner">
+            <div class="card-front">
+                <div class="title">欢迎来到我的主页</div>
+                <div class="description">
+                    你好！我是Kailqq,目前在浙江大学图灵班就读大二,我的专业是计算机科学与技术
+                    我喜欢打篮球,喜欢电影,喜欢音乐,也享受计算机这门学科带给我的乐趣
+                    <p style="font-family: 'JetBrains Mono', '楷体', monospace; color: inherit;">我对前端知之甚少,这个页面使用简单的HTML+CSS+JS实现,如果您有好的建议,欢迎联系我</p>
+                </div>
+                <div class="social-links">
+                    <a href="http://note.kailqq.cc/" target="_blank" class="note"><i class="fas fa-pen"></i> Note</a>
+                    <a href="https://github.com/Kailqq" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://space.bilibili.com/398610279" target="_blank"><i class="fab fa-bilibili"></i> Bilibili</a>
+                    <a href="mailto:kailqq0851@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                </div>
+            </div>
+            <div class="card-back">
+                <div class="title">Welcome to My Homepage</div>
+                <div class="description">
+                    Hello! I am Kailqq, currently a sophomore at Zhejiang University, Turing Class. My major is Computer Science and Technology. I enjoy playing basketball, watching movies, listening to music, and I would be very happy to be friends with you.
+                </div>
+                <div class="social-links">
+                    <a href="http://note.kailqq.cc/" target="_blank" class="note"><i class="fas fa-pen"></i> Note</a>
+                    <a href="https://github.com/Kailqq" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://space.bilibili.com/398610279" target="_blank"><i class="fab fa-bilibili"></i> Bilibili</a>
+                    <a href="mailto:kailqq0851@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
