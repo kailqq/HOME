@@ -18,11 +18,15 @@
             justify-content: center;
             height: 100vh;
             background-color: #f4f4f9;
+            background-image: url('bg-light.png');
+            background-size: cover;
             transition: background-color 0.3s, color 0.3s, background-image 0.3s;
         }
         body.dark-mode {
             background-color: rgba(0, 0, 0, 0.895);
             color: #cacadf;
+            background-image: url('bg-dark.png');
+            background-size: cover;
         }
         .theme-toggle {
             position: absolute;
@@ -60,24 +64,33 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 8px;
             background-color: #fff;
-            padding: 20px;
             transition: background-color 0.3s, color 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            background-color: rgba(58, 198, 245, 0.219);
+            box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+            border: 2px rgba(255,255,255,0.4) solid;
+            border-bottom: 2px rgba(40,40,40,0.35) solid;
+            border-right: 2px rgba(40,40,40,0.35) solid;
         }
         .card-back {
             transform: rotateY(180deg);
         }
         body.dark-mode .card-front, body.dark-mode .card-back {
-            background-color: #000;
-            color: #f4f4f9;
+            border: 2px rgba(236, 137, 7, 0.4) solid;
+            background-color: rgba(30, 33, 35, 0.75);
             box-shadow: 0 7px 7px rgba(236, 137, 7, 0.4); /* White shadow in dark mode */
         }
         body.dark-mode .title,body.dark-mode .social-links a{
             color: #ad8b73; 
         }
         body.dark-mode .description{
-            color: #8b4513; 
+            color: #e17f39; 
         }
         body.dark-mode .social-links a:hover{
             color: #ff6347; 
@@ -96,7 +109,7 @@
             width: 100%;
         }
         .description {
-            color: #666;
+            color: #301f1f;
             font-family: "Great Vibes", "楷体", serif;
             position: absolute;
             top: 30%;
