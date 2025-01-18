@@ -2,7 +2,7 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ['main'] # 如果你的默认分支不是 main，请修改这里
+    branches: ['master'] # 如果你的默认分支不是 main，请修改这里
   workflow_dispatch:
 
 permissions:
@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
       - name: Install dependencies
         run: |
           # 如果你的项目文件不在根目录，需要先 cd 到项目目录
