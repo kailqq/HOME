@@ -128,12 +128,31 @@
             text-decoration: none;
             color: #0073e6;
             font-family: "JetBrains Mono", "黑体", sans-serif;
-            font-size: 0.8em;
-            transition: transform 0.2s, color 0.2s;
+            font-size: 1.1em; /* Adjusted size */
+            transition: transform 0.2s, color 0.2s
         }
         .social-links a:hover {
-            transform: scale(1.2);
+            transform: scale(1.3);
             color: red;
+        }
+        .social-links a::after {
+            content: attr(data-description);
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff00;
+            color: #dad1d1;
+            padding: 5px 10px;
+            border-radius: 5px;
+            opacity: 0;
+            font-size: 0.5em;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .social-links a:hover::after {
+            opacity: 1;
         }
         .cursor-dot {
             position: absolute;
@@ -240,10 +259,10 @@
                     <p style="font-family: 'JetBrains Mono', '楷体', monospace; color: inherit;">我对前端知之甚少,这个页面使用简单的HTML+CSS+JS实现,如果您有好的建议,欢迎联系我</p>
                 </div>
                 <div class="social-links">
-                    <a href="https://note.kailqq.cc/" target="_blank" class="note"><i class="fas fa-pen"></i> Note</a>
-                    <a href="https://github.com/Kailqq" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://space.bilibili.com/398610279" target="_blank"><i class="fab fa-bilibili"></i> Bilibili</a>
-                    <a href="mailto:kailqq0851@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://note.kailqq.cc/" target="_blank" class="note" data-description="Note"><i class="fas fa-pen"></i> </a>
+                    <a href="https://github.com/Kailqq" target="_blank" data-description="GitHub"><i class="fab fa-github"></i> </a>
+                    <a href="https://space.bilibili.com/398610279" target="_blank" data-description="Bilibili"><i class="fab fa-bilibili"></i> </a>
+                    <a href="mailto:kailqq0851@gmail.com" data-description="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="card-back">
@@ -252,10 +271,10 @@
                     Hello! I am Kailqq, currently a sophomore at Zhejiang University, Turing Class. My major is Computer Science and Technology. I enjoy playing basketball, watching movies, listening to music, and I would be very happy to be friends with you.
                 </div>
                 <div class="social-links">
-                    <a href="https://note.kailqq.cc/" target="_blank" class="note"><i class="fas fa-pen"></i> Note</a>
-                    <a href="https://github.com/Kailqq" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                    <a href="https://space.bilibili.com/398610279" target="_blank"><i class="fab fa-bilibili"></i> Bilibili</a>
-                    <a href="mailto:kailqq0851@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                    <a href="https://note.kailqq.cc/" target="_blank" class="note" data-description="Note"><i class="fas fa-pen"></i></a>
+                    <a href="https://github.com/Kailqq" target="_blank" data-description="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://space.bilibili.com/398610279" target="_blank" data-description="Bilibili"><i class="fab fa-bilibili"></i></a>
+                    <a href="mailto:kailqq0851@gmail.com" data-description="Email"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
         </div>
